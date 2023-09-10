@@ -36,7 +36,7 @@ sudo apt install -y python3-pip default-libmysqlclient-dev build-essential pkg-c
 
 git clone https://github.com/saaverdo/flask-alb-app -b alb
 
-cd flask_app
+cd flask-alb-app
 
 sudo pip install -r requirements.txt
 ```
