@@ -7,7 +7,7 @@ It'll show client's IP and server's hostname and write this info into mysql data
 DB connection parameters could be defined with environment variables (example with default values)  
 
 `MYSQL_USER`="admin"      
-`MYSQL_PASSWORD`="Pa55WD" 
+`MYSQL_PASSWORD`="Pa55WD"   
 `MYSQL_DB`="flask_db"     
 `MYSQL_HOST`="127.0.0.1"  
 
