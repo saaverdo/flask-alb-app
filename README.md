@@ -33,7 +33,11 @@ SHOW DATABASES;"
 
 ```
 sudo apt install -y python3-pip default-libmysqlclient-dev build-essential pkg-config 
+```
 
+#### install app and dependencies
+
+```
 git clone https://github.com/saaverdo/flask-alb-app -b alb
 
 cd flask-alb-app
@@ -41,7 +45,7 @@ cd flask-alb-app
 sudo pip install -r requirements.txt
 ```
 
-## Run app
+### Run app
 
 ```
 gunicorn -b 0.0.0.0 app:app
