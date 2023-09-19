@@ -15,7 +15,7 @@ DB connection parameters could be defined with environment variables (example wi
 
 ```
 sudo apt update
-sudo install -y mariadb-server
+sudo apt install -y mariadb-server
 ```
 
 #### Create Mysql user and database
