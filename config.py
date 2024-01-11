@@ -4,7 +4,32 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     HOSTNAME = os.uname()[1]
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+class MysqlConfig(object):
+    HOSTNAME = os.uname()[1]
+
+    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@hostname/database'
+
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     MYSQL_USER = os.environ.get('MYSQL_USER') or 'admin'
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD') or 'Pa55WD'
     MYSQL_DB = os.environ.get('MYSQL_DB') or 'flask_db'
     MYSQL_HOST = os.environ.get('MYSQL_HOST') or '127.0.0.1'
+
+
+class DevelopmentConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'sqlite:///'+ os.path.join(basedir, 'data_dev.sqlite')
+    
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL')
+    
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+
+config = {'dev': DevelopmentConfig,
+          'test': TestConfig,
+          'prod': ProdConfig,
+          'default': DevelopmentConfig}
+    

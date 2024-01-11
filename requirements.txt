@@ -1,6 +1,7 @@
 flask
 flask-bootstrap
 flask-moment
-flask-mysqldb 
+flask-sqlalchemy
 gunicorn
-pymysql
+# flask-mysqldb 
+# pymysql
