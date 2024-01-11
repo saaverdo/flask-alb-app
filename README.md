@@ -1,38 +1,13 @@
 ## Simple app
-This simple flask app is working with mysql.  
-It'll show client's IP and server's hostname and write this info into mysql database.  
+This simple flask app is for load balancer/auto-scaling demonstration.  
+It'll show client's IP and server's hostname.  
 
 ## Installation:
-### DB settings 
-DB connection parameters could be defined with environment variables (example with default values)  
-
-`MYSQL_USER`="admin"      
-`MYSQL_PASSWORD`="Pa55WD"   
-`MYSQL_DB`="flask_db"     
-`MYSQL_HOST`="127.0.0.1"  
-
-#### Install DB server:
-
-```
-sudo apt update
-sudo apt install -y mariadb-server
-```
-
-#### Create Mysql user and database
-
-```
-sudo mysql -e " CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY 'Pa55WD';
-SELECT user FROM mysql.user;
-create database flask_db;
-grant ALL on flask_db.* to  'admin'@'%';
-SHOW DATABASES;"
-```
-
 ### Install app
 #### install packages required for app
 
 ```
-sudo apt install -y python3-pip default-libmysqlclient-dev build-essential pkg-config 
+sudo apt install -y python3-pip
 ```
 
 #### install app and dependencies
