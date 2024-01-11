@@ -15,7 +15,7 @@ moment = Moment(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    remote_ip = request.remote_addr if request.headers.get('X-Forwarded-For') == 'None' else request.headers.get('X-Forwarded-For')
+    remote_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
     return render_template('index.html', hostname=Config.HOSTNAME, remote_ip=remote_ip, current_time=datetime.utcnow())
 
 
