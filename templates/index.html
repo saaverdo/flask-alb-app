@@ -3,7 +3,7 @@
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
  <div class="container">
-  <div class="navbar-header">
+  <div class="navbar-header" style="background-color: rgb({{ color }});">
     <button type="button" class="navbar-toggle"
     data-toggle="collapse" data-target=".navbar-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -27,6 +27,7 @@
     <h1>Hello,Stranger!</h1>
     <p>You are callin from {{ remote_ip }}</p>
     <p>Instance {{ hostname }} is serving you</p>
+    <p>C is {{ color }}</p>
  </div>
 
 <p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
