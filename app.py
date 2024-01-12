@@ -6,6 +6,8 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 
 
+log = []
+hostname=Config.HOSTNAME
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -15,9 +17,15 @@ moment = Moment(app)
 @app.route('/')
 @app.route('/index')
 def index():
+    global log
     remote_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    return render_template('index.html', hostname=Config.HOSTNAME, remote_ip=remote_ip, current_time=datetime.utcnow())
+    if len(log) > 100: log = []
+    log.append({'hostname': hostname, 'remote_ip': remote_ip, 'date': str(datetime.today())})
+    return render_template('index.html', hostname=hostname, remote_ip=remote_ip, current_time=datetime.utcnow(), color=Config.BG_COLOR)
 
+@app.route("/display")
+def display():
+    return render_template("display.html", t_data = log)
 
 @app.route("/healthcheck")
 def healthcheck():
