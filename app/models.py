@@ -7,6 +7,14 @@ class Record(db.Model):
     remote_ip = db.Column(db.String(20))
     date = db.Column(db.String(100))
 
-    def __repr__(self):
-        return '<requests %r>' % self.name
+    def to_dict(self):
+        dict_record = {
+        'hostname': self.hostname,
+        'remote_ip': self.remote_ip,
+        'date': self.date,
+        }
+        return dict_record
+
+    # def __repr__(self):
+    #     return '<requests %r>' % self.remote_ip
     

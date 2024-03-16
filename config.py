@@ -6,6 +6,10 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    @staticmethod
+    def init_app(app):
+        pass
+
 class MysqlConfig(object):
     HOSTNAME = os.uname()[1]
 
@@ -22,6 +26,10 @@ class DevelopmentConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or 'sqlite:///'+ os.path.join(basedir, 'data_dev.sqlite')
     
+    @staticmethod
+    def init_app(app):
+        pass
+    
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL')
     
@@ -33,3 +41,4 @@ config = {'dev': DevelopmentConfig,
           'prod': ProdConfig,
           'default': DevelopmentConfig}
     
+# export FLASK_CONFIG=dev
