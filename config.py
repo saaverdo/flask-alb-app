@@ -10,17 +10,14 @@ class Config(object):
     def init_app(app):
         pass
 
-class MysqlConfig(object):
-    HOSTNAME = os.uname()[1]
+class MysqlConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = 'mysql://username:password@hostname/database'
-
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     MYSQL_USER = os.environ.get('MYSQL_USER') or 'admin'
     MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD') or 'Pa55WD'
     MYSQL_DB = os.environ.get('MYSQL_DB') or 'flask_db'
     MYSQL_HOST = os.environ.get('MYSQL_HOST') or '127.0.0.1'
 
+    SQLALCHEMY_DATABASE_URI = f'mysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}'
 
 class DevelopmentConfig(Config):
     TESTING = True
@@ -39,6 +36,8 @@ class ProdConfig(Config):
 config = {'dev': DevelopmentConfig,
           'test': TestConfig,
           'prod': ProdConfig,
+          'mysql': MysqlConfig,
           'default': DevelopmentConfig}
     
 # export FLASK_CONFIG=dev
+# export FLASK_APP=app.py

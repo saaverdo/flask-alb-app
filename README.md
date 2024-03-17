@@ -1,9 +1,12 @@
 ## Simple app
 This simple flask app is working with mysql.  
-It'll show client's IP and server's hostname and write this info into mysql database.  
+It'll show client's IP and server's hostname and write this info into sqlite or mysql database.  
+Database usage depends on environment variable `FLASK_CONFIG`. By default sqlite will be used.  
+To work with MySQL set config value to mysql:  
+`export FLASK_CONFIG=mysql`
 
 ## Installation:
-### DB settings 
+### DB settings for MySQL
 DB connection parameters could be defined with environment variables (example with default values)  
 
 `MYSQL_USER`="admin"      
@@ -11,7 +14,7 @@ DB connection parameters could be defined with environment variables (example wi
 `MYSQL_DB`="flask_db"     
 `MYSQL_HOST`="127.0.0.1"  
 
-#### Install DB server:
+#### Install DB server for MySQL:
 
 ```
 sudo apt update
@@ -32,13 +35,13 @@ SHOW DATABASES;"
 #### install packages required for app
 
 ```
-sudo apt install -y python3-pip default-libmysqlclient-dev build-essential pkg-config 
+sudo apt install -y python3-pip  
 ```
 
 #### install app and dependencies
 
 ```
-git clone https://github.com/saaverdo/flask-alb-app -b alb
+git clone https://github.com/saaverdo/flask-alb-app -b orm
 
 cd flask-alb-app
 
@@ -48,7 +51,7 @@ sudo pip install -r requirements.txt
 ### Run app
 
 ```
-gunicorn -b 0.0.0.0 app:app
+gunicorn -b 0.0.0.0 appy:app
 ```
 
 App will be available via url `http://<instance_dns_or_ip>:8000`  

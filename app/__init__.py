@@ -13,7 +13,7 @@ db = SQLAlchemy()
 def create_app(config_name):
     app = Flask(__name__)
     print(f'config = {config_name}')
-    config_name = 'default'
+    # config_name = 'default'
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
@@ -22,6 +22,11 @@ def create_app(config_name):
     db.init_app(app)
     
     if config_name == 'default':
+        app_context = app.app_context()
+        app_context.push()
+        db.create_all()
+
+    if config_name == 'mysql':
         app_context = app.app_context()
         app_context.push()
         db.create_all()

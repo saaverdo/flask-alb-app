@@ -15,6 +15,6 @@ class Record(db.Model):
         }
         return dict_record
 
-    # def __repr__(self):
-    #     return '<requests %r>' % self.remote_ip
+    def __repr__(self):
+        return '<requests %r>' % self.remote_ip
     
