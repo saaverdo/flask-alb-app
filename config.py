@@ -38,6 +38,3 @@ config = {'dev': DevelopmentConfig,
           'prod': ProdConfig,
           'mysql': MysqlConfig,
           'default': DevelopmentConfig}
-    
-# export FLASK_CONFIG=dev
-# export FLASK_APP=app.py

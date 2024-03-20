@@ -3,5 +3,3 @@ flask-bootstrap
 flask-moment
 flask-sqlalchemy
 gunicorn
-# flask-mysqldb 
-# pymysql
