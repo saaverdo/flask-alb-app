@@ -42,7 +42,7 @@ Application requires Python 3.8 of above installed in system.
 
 
 ```
-sudo apt install -y python3-pip  
+sudo apt install -y python3-pip default-libmysqlclient-dev build-essential pkg-config
 ```
 
 #### install app and dependencies
