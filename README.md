@@ -23,7 +23,7 @@ sudo apt install -y mariadb-server
 
 #### Create Mysql user and database
 
-```
+```bash
 sudo mysql -e " CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY 'Pa55WD';
 SELECT user FROM mysql.user;
 create database flask_db;
