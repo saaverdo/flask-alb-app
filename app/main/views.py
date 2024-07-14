@@ -17,7 +17,8 @@ def index():
     
     db.session.add(record)
     db.session.commit()
-    return render_template('index.html', hostname=hostname, remote_ip=remote_ip, current_time=datetime.utcnow())
+    config_name = current_app.config['CONFIG_NAME']
+    return render_template('index.html', hostname=hostname, remote_ip=remote_ip, current_time=datetime.utcnow(), stage=config_name)
 
 @main.route("/display")
 def display():

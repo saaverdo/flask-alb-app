@@ -12,8 +12,9 @@ db = SQLAlchemy()
 
 def create_app(config_name):
     app = Flask(__name__)
-    print(f'config = {config_name}')
+    print(f'creating app with config = {config_name}')
     # config_name = 'default'
+    config[config_name].CONFIG_NAME = config_name
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
@@ -21,15 +22,14 @@ def create_app(config_name):
     moment.init_app(app)
     db.init_app(app)
     
-    if config_name == 'default':
-        app_context = app.app_context()
-        app_context.push()
-        db.create_all()
+    app_context = app.app_context()
+    app_context.push()
+    db.create_all()
 
-    if config_name == 'mysql':
-        app_context = app.app_context()
-        app_context.push()
-        db.create_all()
+    # if config_name == 'mysql':
+    #     app_context = app.app_context()
+    #     app_context.push()
+    #     db.create_all()
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
