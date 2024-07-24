@@ -1,9 +1,14 @@
 import os
-from flask import render_template, request, session, redirect, url_for, current_app
+from flask import render_template, request, session, redirect, url_for, current_app, Response
 from datetime import datetime
 from .. import db
 from ..models import Record
 from . import main
+import prometheus_client
+
+
+# VIEWS_COUNT = prometheus_client.Counter('views_count', 'A counter of page views')
+
 
 @main.route('/')
 @main.route('/index')
@@ -18,6 +23,8 @@ def index():
     db.session.add(record)
     db.session.commit()
     config_name = current_app.config['CONFIG_NAME']
+    # VIEWS_COUNT.inc()
+    # current_app.view_count.inc()
     return render_template('index.html', hostname=hostname, remote_ip=remote_ip, current_time=datetime.utcnow(), stage=config_name)
 
 @main.route("/display")
@@ -28,3 +35,9 @@ def display():
 @main.route("/healthcheck")
 def healthcheck():
     return "ok", 200
+
+# Prometheus endpoint
+# @main.route('/metrics')
+# def metrics():
+#     return Response(prometheus_client.generate_latest(),
+#                     mimetype=current_app.config['CONTENT_TYPE_LATEST'])

@@ -5,7 +5,8 @@ class Config(object):
     HOSTNAME = os.uname()[1]
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+    CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
+    
     @staticmethod
     def init_app(app):
         pass
