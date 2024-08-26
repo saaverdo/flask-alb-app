@@ -6,3 +6,4 @@ gunicorn
 mysqlclient
 prometheus_client
 prometheus_flask_exporter
+structlog

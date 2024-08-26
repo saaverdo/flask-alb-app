@@ -12,10 +12,26 @@ bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
 metrics = PrometheusMetrics.for_app_factory()
+import structlog
+import logging 
+
+log = structlog.get_logger()
+# logger = logging.getLogger()
+
+# # logging.getLogger("netmiko").setLevel(logging.WARNING)
+# logging.basicConfig(
+#     format="%(threadName)s %(levelname)s: %(message)s",
+#     level=logging.INFO,
+# )
+#             log.error('zipkin_error',
+#                       service='post',
+#                       traceback=tb)
+# logging.info(f'Connecting to {ip}')
 
 def create_app(config_name):
     app = Flask(__name__)
-    print(f'creating app with config = {config_name}')
+    # app.logger.info(f'Service appka started with config: {config_name}')
+    # print(f'creating app with config = {config_name}')
     # config_name = 'default'
     config[config_name].CONFIG_NAME = config_name
     app.config.from_object(config[config_name])
@@ -26,11 +42,16 @@ def create_app(config_name):
     bootstrap.init_app(app)
     moment.init_app(app)
     db.init_app(app)
+    # if config_name in ['default', 'mysql']:
+    log.info(app.config['APP_NAME'], message=f'"App started with config: {config_name}"')
+    # app.logger.info(f'Service appka started with config: {config_name}')
+    #     logging.info(f'Service appka started with config={config_name}')
     
+
     app_context = app.app_context()
     app_context.push()
     db.create_all()
-    
+
     metrics.info('app_info', 'Application info', version='0.0.3-metrics')
     metrics.info('app_config', 'Application config', config=f'{config_name}')
     # prometheus metrics
